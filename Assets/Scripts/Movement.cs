@@ -9,7 +9,6 @@ public class Movement : MonoBehaviour
 
     private Vector2 moveDirection;
     private Vector2 currentVelocity = Vector2.zero;
-    private float moveAngle;
 
     Vector3 dir;
 
@@ -23,10 +22,12 @@ public class Movement : MonoBehaviour
         // Apply the lerped velocity to the Rigidbody
         rb.velocity = currentVelocity;
 
-        moveAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
-
         dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    public Vector3 getMousePosition() {
+        return dir;
     }
 }

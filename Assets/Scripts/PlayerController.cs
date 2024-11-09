@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Movement movement;
+    public Weapons weapon;
     //public Dash dash;
 
     // Start is called before the first frame update
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0)) {
+            weapon.Fire(movement.getMousePosition());
+        }
         movement.updateMovement(rb);
     }
 }
