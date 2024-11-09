@@ -38,7 +38,6 @@ public class Movement : MonoBehaviour
 
     public void startDash() {
         dash.dash(moveAngle);
-        Debug.Log("Dash Started in Movement");
     }
 
     public Vector3 getMousePosition() {

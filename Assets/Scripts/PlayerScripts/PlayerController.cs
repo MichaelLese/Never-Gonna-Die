@@ -9,12 +9,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Movement movement;
     public Weapons weapon;
-    //public Dash dash;
+    public PlayerHealth health;
 
     // Start is called before the first frame update
     void Start()
     {
         //Initialize Health
+        health.initHealth();
     }
 
     // Update is called once per frame
@@ -25,8 +26,19 @@ public class PlayerController : MonoBehaviour
         } 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             movement.startDash();
-            Debug.Log("Dash Started in Player controller");
         }
         movement.updateMovement(rb);
+
+        if (health.getIsDead()) {
+            //End the game
+            Debug.Log("End Game");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Asteroid")) {
+            Debug.Log("Player Hit!");
+            health.takeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
+        }
     }
 }

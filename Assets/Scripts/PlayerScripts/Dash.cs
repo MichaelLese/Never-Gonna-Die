@@ -16,10 +16,7 @@ public class Dash : MonoBehaviour {
     //public float getDashSpeed() { return currentDashSpeed; }
 
     public void dash(float moveAngle) {
-        Debug.Log("Dash Started in Dash");
         if ((Time.time - lastDash) >= dashCooldown) {
-            Debug.Log("Dash IN LOOP!!! in Dash");
-
             currentDashSpeed = dashSpeed;
             lastDash = Time.time;
             isDashing = true;
@@ -27,7 +24,6 @@ public class Dash : MonoBehaviour {
 
             Invoke("endDash", dashActive);
             Invoke("setRecoveringFalse", dashRecovery);
-            Debug.Log("Dash Finished in Dash");
         }
     }
 
