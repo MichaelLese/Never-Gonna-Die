@@ -31,13 +31,14 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         else {
-            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * moveSpeed, smoothTime * Time.deltaTime);
+            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * dash.getDashSpeed(), smoothTime * Time.deltaTime);
             rb.velocity = currentVelocity;
         }
     }
 
     public void startDash() {
         dash.dash(moveAngle);
+        Debug.Log("Dash Started in Movement");
     }
 
     public Vector3 getMousePosition() {

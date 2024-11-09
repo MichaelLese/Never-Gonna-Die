@@ -10,13 +10,16 @@ public class Dash : MonoBehaviour {
     public float dashCooldown = 2f;
     public float dashRecovery = 1.25f;
     public bool isRecovering = false;
-    private float lastDash;
+    private float lastDash = 0;
     private bool isDashing = false;
 
-    public float getDashSpeed() { return currentDashSpeed; }
+    //public float getDashSpeed() { return currentDashSpeed; }
 
     public void dash(float moveAngle) {
+        Debug.Log("Dash Started in Dash");
         if ((Time.time - lastDash) >= dashCooldown) {
+            Debug.Log("Dash IN LOOP!!! in Dash");
+
             currentDashSpeed = dashSpeed;
             lastDash = Time.time;
             isDashing = true;
@@ -24,7 +27,12 @@ public class Dash : MonoBehaviour {
 
             Invoke("endDash", dashActive);
             Invoke("setRecoveringFalse", dashRecovery);
+            Debug.Log("Dash Finished in Dash");
         }
+    }
+
+    public float getDashSpeed() {
+        return dashSpeed;
     }
 
     public void endDash() {

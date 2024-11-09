@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             weapon.Fire(movement.getMousePosition());
+        } 
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            movement.startDash();
+            Debug.Log("Dash Started in Player controller");
         }
         movement.updateMovement(rb);
     }
