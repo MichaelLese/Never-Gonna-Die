@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,11 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private GameObject emptyShieldPrefab;
 
     [SerializeField] private Transform heartsContainer;
+    [SerializeField] private TextMeshProUGUI timerText;
 
-    public void InitHearts(int maxHearts, int maxShields) {
+    public void InitPlayerUI(int maxHearts, int maxShields, float countdownTime) {
         UpdateHeartsDisplay(maxHearts, maxHearts, maxShields, maxShields);
+        StartCountdown(countdownTime);
     }
 
     public void UpdateHeartsDisplay(int currentHearts, int maxHearts, int currentShield, int maxShields) {
@@ -39,4 +42,21 @@ public class PlayerUI : MonoBehaviour
             Instantiate(emptyShieldPrefab, heartsContainer);
         }
     }
-}
+
+    public void StartCountdown(float countdownTime) {
+        StartCoroutine(CountdownCoroutine(countdownTime));
+    }
+
+    private IEnumerator CountdownCoroutine(float countdownTime) {
+        while (countdownTime > 0) {
+            // Update the timer text in MM:SS format
+            timerText.text = $"{Mathf.FloorToInt(countdownTime / 60):00}:{Mathf.FloorToInt(countdownTime % 60):00}";
+            yield return new WaitForSeconds(1f);
+            countdownTime--;
+            }
+        timerText.text = "00:00";
+
+        ScreenManager sm = GetComponent<ScreenManager>();
+        sm.TriggerUpgradeScreen();
+    }
+    }

@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
         weapon.InitWeapons(upgrades.GetCrit());
         //Initialize the screen manager
         screenManager.InitScreenManager();
-        //Initializes the healthbar
-        playerUI.InitHearts(health.GetMaxHearts(), health.GetCurrentShield());
+        //Initializes the PlayerUI
+        playerUI.InitPlayerUI(health.GetMaxHearts(), health.GetCurrentShield(), 100f);
     }
 
     // Update is called once per frame
@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Asteroid")) {
             Debug.Log("Player Hit!");
-            playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
             health.TakeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
+            playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
         }
     }
 }

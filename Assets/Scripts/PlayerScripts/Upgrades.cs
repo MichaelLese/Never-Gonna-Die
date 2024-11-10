@@ -15,9 +15,9 @@ public class Upgrades : MonoBehaviour
 
     public void InitUpgrades()
     {
-        agility = 0;
-        crit = 0;
-        shield = 0;
+        //agility = 3;
+        //crit = 5;
+        //shield = 3;
     }
 
     public int GetAgility() {
@@ -39,6 +39,7 @@ public class Upgrades : MonoBehaviour
     }
 
     public int GetShield() {
+        Debug.Log("shield: " + shield);
         return shield;
     }
     public void IncreaseShield() {

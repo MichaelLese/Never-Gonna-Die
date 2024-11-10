@@ -9,11 +9,12 @@ public class PlayerHealth : MonoBehaviour
     private bool isDead;
 
     private int maxShields;
-    private int currentShields;
+    public int currentShields;
 
     public void InitHealth(int shields) {
         currentHearts = numHearts;
         maxShields = shields;
+        currentShields = shields;
     }
 
     public int GetCurrentHearts() {
@@ -34,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damageInHearts) {
         if (currentShields > 0) {
-            currentShields--;
+            currentShields -=damageInHearts;
         }
         else {
             currentHearts -= damageInHearts;

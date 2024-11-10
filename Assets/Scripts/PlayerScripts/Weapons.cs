@@ -41,7 +41,7 @@ public class Weapons : MonoBehaviour {
         if (randomNumber == 10) {
             return 3;
         }
-        else if (randomNumber < ((2 * crit)-1)) {
+        else if (randomNumber >= ((2 * crit)-1)) {
             return 1;
         } else {
             return 2;
