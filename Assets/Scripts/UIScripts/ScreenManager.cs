@@ -10,6 +10,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject startScreenCanvas;
     [SerializeField] private GameObject endScreenCanvas;
     [SerializeField] private GameObject upgradeScreenCanvas;
+    [SerializeField] private GameObject instructionScreenCanvas;
 
     [SerializeField] private GameObject lockedBar;
     [SerializeField] private GameObject unlockedBar;
@@ -33,6 +34,7 @@ public class ScreenManager : MonoBehaviour
         startScreenCanvas.SetActive(true); 
         endScreenCanvas.SetActive(false);
         upgradeScreenCanvas.SetActive(false);
+        instructionScreenCanvas.SetActive(false);
         Time.timeScale = 0.0f;
     }
     public void StartGame() {
@@ -45,8 +47,21 @@ public class ScreenManager : MonoBehaviour
         Time.timeScale = 0f;                // Pause the game
     }
 
+    public void TriggerInstructions() {
+        startScreenCanvas.SetActive(false);
+        endScreenCanvas.SetActive(false);
+        upgradeScreenCanvas.SetActive(false);
+        instructionScreenCanvas.SetActive(true);
+    }
+    public void TriggerLeaveInstructions() {
+        startScreenCanvas.SetActive(true);
+        endScreenCanvas.SetActive(false);
+        upgradeScreenCanvas.SetActive(false);
+        instructionScreenCanvas.SetActive(false);
+    }
+
     public void TriggerUpgradeScreen() {
-        playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
+        playerUI.UpdateHeartsDisplay(health.GetMaxHearts(), health.GetMaxHearts(), health.GetMaxShield(), health.GetMaxShield());
         upgradeScreenCanvas.SetActive(true);// Show the upgrade screen
         UpdateUpgradeDisplays();
         UpdateButtons();
