@@ -3,8 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapons : MonoBehaviour {
+    public enum GunType {
+        Normal,
+        Burst,
+        Shotgun
+    }
+    public GunType currentGun = GunType.Normal;
+
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    private bool normalIsUpgraded = false;
+    private bool burstIsUpgraded = false;
+    private bool shotgunIsUpgraded = false;
+
+    private bool ownsBurst = false;
+    private bool ownsShotgun = false;
 
     public float normalShotCooldown = 0.25f;
     public float burstShotCooldown = 1.75f;
@@ -16,10 +30,7 @@ public class Weapons : MonoBehaviour {
     public float burstFireForce = 20f;
     public float shotgunFireForce = 20f;
 
-
     private int critLevel;
-
-
 
     public void Start() {
         lastShot = Time.time - normalShotCooldown;
@@ -30,7 +41,17 @@ public class Weapons : MonoBehaviour {
     }
 
     public void Fire(Vector3 mousePosition) {
-        FireShotgun(mousePosition); //For now no if statement
+        switch (currentGun) {
+            case GunType.Normal:
+                FireNormal(mousePosition);
+                break;
+            case GunType.Burst:
+                FireBurst(mousePosition);
+                break;
+            case GunType.Shotgun:
+                FireShotgun(mousePosition);
+                break;
+        }
     }
 
     public void FireNormal(Vector3 mousePosition) {
@@ -38,8 +59,14 @@ public class Weapons : MonoBehaviour {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null) {
-                bulletScript.damage = CalculateDamage(critLevel);
-                // TODO: maybe change so it also changes color when it is a crit
+
+                if (normalIsUpgraded) {
+                    bulletScript.damage = CalculateDamage(critLevel) + 1; // Upgrade adds one damage
+                    // TODO: maybe change so it also changes color when it is a crit
+                }
+                else {
+                    bulletScript.damage = CalculateDamage(critLevel);
+                }
             }
             Vector2 direction = (mousePosition).normalized;
             bullet.GetComponent<Rigidbody2D>().AddForce(direction * normalFireForce, ForceMode2D.Impulse);
@@ -56,7 +83,11 @@ public class Weapons : MonoBehaviour {
     }
 
     private IEnumerator FireBurstCoroutine(Vector3 mousePosition) {
-        int burstCount = 4; // Number of bullets in the burst
+        int burstCount = 4;
+        if (burstIsUpgraded) {
+            burstCount = 6; // Upgrade increases # of bullets
+        }
+        
         for (int i = 0; i < burstCount; i++) {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
@@ -76,8 +107,13 @@ public class Weapons : MonoBehaviour {
         if ((Time.time - lastShot) >= shotgunShotCooldown) {
             float spreadAngle = 8f;
 
+            int burstCount = 4;
+            if (shotgunIsUpgraded) {
+                burstCount = 7; //Upgrade increases the # of bullets
+            }
+
             // Fire 5 bullets (for example)
-            for (int i = 0; i <= 4; i++) {
+            for (int i = 0; i <= burstCount; i++) {
                 // Create a spread
                 float angleOffset = Random.Range(-spreadAngle, spreadAngle);
                 // Create the bullet
@@ -127,5 +163,37 @@ public class Weapons : MonoBehaviour {
         } else {
             return 2;
         }
+    }
+
+    public bool getNormalIsUpgraded() {
+        return normalIsUpgraded;
+    }
+    public void setNormalIsUpgraded() {
+        normalIsUpgraded = true;
+    }
+    public bool getBurstIsUpgraded() {
+        return burstIsUpgraded;
+    }
+    public void setBurstIsUpgraded() {
+        burstIsUpgraded = true;
+    }
+    public bool getShotgunIsUpgraded() {
+        return shotgunIsUpgraded;
+    }
+    public void setShotgunIsUpgraded() {
+        shotgunIsUpgraded = true;
+    }
+
+    public bool getOwnsBurst() {
+        return ownsBurst;
+    }
+    public void setOwnsBurst() {
+        ownsBurst = true;
+    }
+    public bool getOwnsShotgun() {
+        return ownsShotgun;
+    }
+    public void setOwnsShotgun() {
+        ownsShotgun = true;
     }
 }

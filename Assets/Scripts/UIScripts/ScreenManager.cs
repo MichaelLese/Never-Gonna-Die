@@ -19,6 +19,9 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Transform critContainer;
     [SerializeField] private Transform agilityContainer;
     [SerializeField] private Transform shieldContainer;
+    [SerializeField] private Transform normalWeaponContainer;
+    [SerializeField] private Transform burstWeaponContainer;
+    [SerializeField] private Transform shotgunContainer;
 
     [SerializeField] private Button sacrificeButton;
     [SerializeField] private Button critButton;
@@ -34,6 +37,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private PlayerHealth health;
     [SerializeField] private PlayerUI playerUI;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private Weapons weapons;
 
 
     public void InitScreenManager() {
