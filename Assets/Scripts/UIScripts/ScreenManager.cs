@@ -12,6 +12,7 @@ public class ScreenManager : MonoBehaviour
     public void InitScreenManager() {
         startScreenCanvas.SetActive(true); 
         endScreenCanvas.SetActive(false);
+        upgradeScreenCanvas.SetActive(false);
         Time.timeScale = 0.0f;
     }
     public void StartGame() {

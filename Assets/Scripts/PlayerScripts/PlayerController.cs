@@ -40,8 +40,7 @@ public class PlayerController : MonoBehaviour
         movement.UpdateMovement(rb);
 
         if (health.GetIsDead()) {
-            //End the game
-            screenManager.TriggerGameOver();
+            screenManager.TriggerGameOver();    // Go to the game over screen!
             Debug.Log("End Game");
         }
     }

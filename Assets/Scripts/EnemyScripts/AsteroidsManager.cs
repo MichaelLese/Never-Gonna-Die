@@ -17,7 +17,7 @@ public class AsteroidsManager : MonoBehaviour {
 
     private void ManageAstroids() {
         CreateAstroid();
-        Invoke("manageAstroids", waitTime);
+        Invoke("ManageAstroids", waitTime);
     }
 
     private void CreateAstroid() {
