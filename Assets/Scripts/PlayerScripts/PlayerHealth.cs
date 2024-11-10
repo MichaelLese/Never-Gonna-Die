@@ -12,7 +12,6 @@ public class PlayerHealth : MonoBehaviour
     public int currentShields;
 
     public void InitHealth(int shields) {
-        currentHearts = numHearts;
         maxShields = shields;
         currentShields = shields;
     }
@@ -21,9 +20,13 @@ public class PlayerHealth : MonoBehaviour
         if (numHearts > 1) {
             numHearts --;
         }
+        if (currentHearts > numHearts) {
+            currentHearts --;
+        }
     }
     public void IncreaseMaxHeart() {
         numHearts++;
+        currentHearts++;
     }
 
     public int GetCurrentHearts() {
@@ -41,7 +44,9 @@ public class PlayerHealth : MonoBehaviour
     public bool GetIsDead() {
         return isDead;
     }
-
+    public void setHearts() {
+        currentHearts = numHearts;
+    }
     public void SetShields(int shields) {
         maxShields = shields;
         currentShields = shields;

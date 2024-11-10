@@ -40,10 +40,6 @@ public class Weapons : MonoBehaviour {
         critLevel = crit;
     }
 
-    public void changeWeapon(GunType newGun) {
-        currentGun = newGun;
-    }
-
     public void Fire(Vector3 mousePosition) {
         switch (currentGun) {
             case GunType.Normal:
@@ -220,5 +216,14 @@ public class Weapons : MonoBehaviour {
         else {
             shotgunIsUpgraded = true;
         }
+    }
+
+    public void equipNormal() {
+        currentGun = GunType.Normal;
+    }
+    public void equipBurst() {
+        currentGun = GunType.Burst;
+    }public void equipShotgun() {
+        currentGun = GunType.Shotgun;
     }
 }

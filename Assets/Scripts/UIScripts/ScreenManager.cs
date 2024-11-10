@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Weapons;
 
 public class ScreenManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Button equipNormalWeaponButton;
     [SerializeField] private Button equipBurstWeaponButton;
     [SerializeField] private Button equipShotgunWeaponButton;
+    [SerializeField] private Image equipedGunImage;
     [SerializeField] private TextMeshProUGUI waveText;
 
     [SerializeField] private TextMeshProUGUI scrapTotal;
@@ -109,7 +111,7 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void TriggerUpgradeScreen() {
-        playerUI.UpdateHeartsDisplay(health.GetMaxHearts(), health.GetMaxHearts(), health.GetMaxShield(), health.GetMaxShield());
+        playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
         upgradeScreenCanvas.SetActive(true);// Show the upgrade screen
         waveText.text = "START WAVE " + (levelManager.GetCurrentLevel() + 1);
         UpdateUpgradeDisplays();
@@ -179,6 +181,18 @@ public class ScreenManager : MonoBehaviour
         }
         else {
             sacrificeButton.enabled = true;
+        }
+
+        switch (weapons.currentGun) {
+            case GunType.Normal:
+                equipedGunImage.sprite = Resources.Load<Sprite>("Misc/NormalGunImage");
+                break;
+            case GunType.Burst:
+                equipedGunImage.sprite = Resources.Load<Sprite>("Misc/BurstGunImage");
+                break;
+            case GunType.Shotgun:
+                equipedGunImage.sprite = Resources.Load<Sprite>("Misc/ShotgunGunImage");
+                break;
         }
 
         UpdateScrapTotal();

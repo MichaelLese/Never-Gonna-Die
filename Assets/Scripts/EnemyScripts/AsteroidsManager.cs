@@ -25,7 +25,7 @@ public class AsteroidsManager : MonoBehaviour {
         }
         if (levelManager.GetCurrentLevel() > 5) {
 
-            spawnTime = Mathf.Min((float)(5 - ((playerUI.GetCountUpTime() / 60) * 0.5)), 1.5f);
+            spawnTime = Mathf.Min((float)(5 - ((playerUI.GetCountUpTime() / 60) * 0.5)), 1.0f);
             Invoke("ManageAstroids", spawnTime);
         }
     }
