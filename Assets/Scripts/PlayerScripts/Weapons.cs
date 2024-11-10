@@ -5,14 +5,24 @@ using UnityEngine;
 public class Weapons : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float shotCooldown = 10f;
+
+    public float normalShotCooldown = 0.25f;
+    public float burstShotCooldown = 1.0f;
+    public float shotgunShotCooldown = 1.0f;
+
     private float lastShot;
-    public float fireForce = 20f;
+
+    public float normalFireForce = 20f;
+    public float burstFireForce = 20f;
+    public float shotgunFireForce = 20f;
+
 
     private int critLevel;
 
+
+
     public void Start() {
-        lastShot = Time.time - shotCooldown;
+        lastShot = Time.time - normalShotCooldown;
     }
 
     public void InitWeapons(int crit) {
@@ -20,7 +30,11 @@ public class Weapons : MonoBehaviour {
     }
 
     public void Fire(Vector3 mousePosition) {
-        if ((Time.time - lastShot) >= shotCooldown) {
+        FireNormal(mousePosition); //For now no if statement
+    }
+
+    public void FireNormal(Vector3 mousePosition) {
+        if ((Time.time - lastShot) >= normalShotCooldown) {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null) {
@@ -28,7 +42,38 @@ public class Weapons : MonoBehaviour {
                 // TODO: maybe change so it also changes color when it is a crit
             }
             Vector2 direction = (mousePosition).normalized;
-            bullet.GetComponent<Rigidbody2D>().AddForce(direction * fireForce, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(direction * normalFireForce, ForceMode2D.Impulse);
+
+            lastShot = Time.time;
+        }
+    }
+
+    public void FireBurst(Vector3 mousePosition) {
+        if ((Time.time - lastShot) >= burstShotCooldown) {
+            for (int i = 0; i < 4; i++) {
+                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null) {
+                    bulletScript.damage = CalculateDamage(critLevel);
+                    // TODO: maybe change so it also changes color when it is a crit
+                }
+                Vector2 direction = (mousePosition).normalized;
+                bullet.GetComponent<Rigidbody2D>().AddForce(direction * burstFireForce, ForceMode2D.Impulse);
+            }
+            lastShot = Time.time;
+
+        }
+    }
+    public void FireShotgun(Vector3 mousePosition) {
+        if ((Time.time - lastShot) >= shotgunShotCooldown) {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null) {
+                bulletScript.damage = CalculateDamage(critLevel);
+                // TODO: maybe change so it also changes color when it is a crit
+            }
+            Vector2 direction = (mousePosition).normalized;
+            bullet.GetComponent<Rigidbody2D>().AddForce(direction * shotgunFireForce, ForceMode2D.Impulse);
 
             lastShot = Time.time;
         }
