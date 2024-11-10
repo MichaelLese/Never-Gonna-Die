@@ -7738,7 +7738,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4405874850082812329, guid: 3307d86e654abfa4da0ab931261fc29c, type: 3}
   firePoint: {fileID: 823498676}
   normalShotCooldown: 0.25
-  burstShotCooldown: 1
+  burstShotCooldown: 1.5
   shotgunShotCooldown: 1
   normalFireForce: 20
   burstFireForce: 30
