@@ -69,4 +69,10 @@ public class Upgrades : MonoBehaviour
     public int GetScrap() {
         return scrap;
     }
+
+    public void BuyWeaponUpgrade() {
+        if (scrap >= 5) {
+            scrap -= 5;
+        }
+    }
 }

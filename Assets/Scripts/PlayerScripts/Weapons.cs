@@ -40,6 +40,10 @@ public class Weapons : MonoBehaviour {
         critLevel = crit;
     }
 
+    public void changeWeapon(GunType newGun) {
+        currentGun = newGun;
+    }
+
     public void Fire(Vector3 mousePosition) {
         switch (currentGun) {
             case GunType.Normal:
@@ -195,5 +199,26 @@ public class Weapons : MonoBehaviour {
     }
     public void SetOwnsShotgun() {
         ownsShotgun = true;
+    }
+
+    //Functions for the buttons to use
+    public void pressNormalButton() {
+        normalIsUpgraded = true;
+    }
+    public void pressBurstButton() {
+        if (!ownsBurst) {
+            ownsBurst |= true;
+        }
+        else {
+            burstIsUpgraded = true;
+        }
+    }
+    public void pressShotgunButton() {
+        if (!ownsShotgun) {
+            ownsShotgun |= true;
+        }
+        else {
+            shotgunIsUpgraded = true;
+        }
     }
 }

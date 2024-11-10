@@ -30,6 +30,9 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Button normalWeaponButton;
     [SerializeField] private Button burstWeaponButton;
     [SerializeField] private Button shotgunWeaponButton;
+    [SerializeField] private Button equipNormalWeaponButton;
+    [SerializeField] private Button equipBurstWeaponButton;
+    [SerializeField] private Button equipShotgunWeaponButton;
     [SerializeField] private TextMeshProUGUI waveText;
 
     [SerializeField] private TextMeshProUGUI scrapTotal;
@@ -158,6 +161,19 @@ public class ScreenManager : MonoBehaviour
             shotgunWeaponButton.enabled = false;
         } else { shotgunWeaponButton.enabled = true; }
 
+        if (weapons.GetOwnsBurst()) {
+            equipBurstWeaponButton.enabled = true;
+        }
+        else {
+            equipBurstWeaponButton.enabled = false;
+        }
+        if (weapons.GetOwnsShotgun()) {
+            equipShotgunWeaponButton.enabled = true;
+        }
+        else {
+            equipShotgunWeaponButton.enabled = false;
+        }
+
         if (health.GetMaxHearts() <= 1) {
             sacrificeButton.enabled = false;
         }
@@ -191,6 +207,7 @@ public class ScreenManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        //For Ship Upgrades
         // Instantiate new full heart images based on current health
         for (int i = 0; i < upgrades.GetShield(); i++) {
             Instantiate(unlockedBar, shieldContainer);
@@ -198,7 +215,6 @@ public class ScreenManager : MonoBehaviour
         for (int i = 0; i < upgrades.GetMaxShield() - upgrades.GetShield(); i++) {
             Instantiate(lockedBar, shieldContainer);
         }
-
         // Instantiate new empty heart images based on current health
         for (int i = 0; i < upgrades.GetAgility(); i++) {
             Instantiate(unlockedBar, agilityContainer);
@@ -206,13 +222,50 @@ public class ScreenManager : MonoBehaviour
         for (int i = 0; i < upgrades.GetMaxAgility() - upgrades.GetAgility(); i++) {
             Instantiate(lockedBar, agilityContainer);
         }
-
         // Instantiate new fuill shield images based on current shield
         for (int i = 0; i < upgrades.GetCrit(); i++) {
             Instantiate(unlockedBar, critContainer);
         }
         for (int i = 0; i < upgrades.GetMaxCrit() - upgrades.GetCrit(); i++) {
             Instantiate(lockedBar, critContainer);
+        }
+
+        //For Weapon upgrades/purchases\
+        //For Normal Weapon
+        Instantiate(unlockedBar, normalWeaponContainer);
+        if (weapons.GetNormalIsUpgraded()) {
+            Instantiate(unlockedBar, normalWeaponContainer);
+        }
+        else {
+            Instantiate(lockedBar, normalWeaponContainer);
+        }
+
+        //For Burst Weapon
+        if (weapons.GetOwnsBurst()) {
+            Instantiate(unlockedBar, burstWeaponContainer);
+        }
+        else {
+            Instantiate(lockedBar, burstWeaponContainer);
+        }
+        if (weapons.GetBurstIsUpgraded()) {
+            Instantiate(unlockedBar, burstWeaponContainer);
+        }
+        else {
+            Instantiate(lockedBar, burstWeaponContainer);
+        }
+
+        //For shotgun
+        if (weapons.GetOwnsShotgun()) {
+            Instantiate(unlockedBar, shotgunWeaponContainer);
+        }
+        else {
+            Instantiate(lockedBar, shotgunWeaponContainer);
+        }
+        if (weapons.GetShotgunIsUpgraded()) {
+            Instantiate(unlockedBar, shotgunWeaponContainer);
+        }
+        else {
+            Instantiate(lockedBar, shotgunWeaponContainer);
         }
     }
 }
