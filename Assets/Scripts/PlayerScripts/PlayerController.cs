@@ -10,12 +10,15 @@ public class PlayerController : MonoBehaviour
     public Movement movement;
     public Weapons weapon;
     public PlayerHealth health;
+    public Upgrades upgrades;
 
     // Start is called before the first frame update
     void Start()
     {
         //Initialize Health
         health.initHealth();
+        //Initialize Upgrades
+        upgrades.initUpgrades();
     }
 
     // Update is called once per frame

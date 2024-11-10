@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7941869104520022423}
   - component: {fileID: 8093524161176031437}
   - component: {fileID: 2021824041017782848}
-  - component: {fileID: 5346514016060724628}
   - component: {fileID: 1698051956956698264}
   - component: {fileID: 4030933045610791562}
   m_Layer: 9
@@ -30,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4405874850082812329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0116, y: 0.9114, z: 0}
-  m_LocalScale: {x: 0.09954522, y: 0.23611495, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.13238, y: 0.3422, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,23 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5346514016060724628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4405874850082812329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 1663e079656bd4d49aa586ec1052f5ca, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 0.5
-  priority: 0
 --- !u!114 &1698051956956698264
 MonoBehaviour:
   m_ObjectHideFlags: 0
