@@ -14,6 +14,36 @@ public class Movement : MonoBehaviour
     private float moveAngle;
     Vector3 dir;
 
+    // TODO: Make agility actually do something
+    private int agilityLevel;
+
+    public void initMovement(int agility) {
+        agilityLevel = agility;
+
+        switch (agility) {
+            case 0:
+                //Do Nothing
+                break;
+            case 1:
+                moveSpeed = (float)(1.25) * moveSpeed;
+                smoothTime = (float)(2) * smoothTime;
+                break;
+
+            case 2:
+                moveSpeed = (float)(1.60) * moveSpeed;
+                smoothTime = (float)(5) * smoothTime;
+                break;
+
+            case 3:
+                moveSpeed = (float)(2) * moveSpeed;
+                smoothTime = (float)(9) * smoothTime;
+                break;
+            default:
+                //Do nothing
+                break;
+        }
+    }
+
     public void updateMovement(Rigidbody2D rb) {
         if (dash.getIsDashing() == false) {
             float moveX = Input.GetAxisRaw("Horizontal");

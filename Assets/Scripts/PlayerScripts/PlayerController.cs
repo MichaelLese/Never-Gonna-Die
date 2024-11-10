@@ -16,9 +16,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //Initialize Health
-        health.initHealth();
+        health.initHealth(upgrades.getShield());
         //Initialize Upgrades
         upgrades.initUpgrades();
+        //Initialize movement (for agility)
+        movement.initMovement(upgrades.getAgility());
+        //Initialize weapon damage
+        weapon.initWeapons(upgrades.getCrit());
     }
 
     // Update is called once per frame

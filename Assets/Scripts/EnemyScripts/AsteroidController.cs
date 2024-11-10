@@ -40,8 +40,8 @@ public class AsteroidController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("PlayerBullet")) {
-            Debug.Log("Asteroid Hit!");
-            health.takeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
+            Debug.Log("Asteroid Hit! It took damage: " + health.getCurrentHearts() + " From a bullet that did: " + other.gameObject.GetComponent<Bullet>().damage);
+            health.takeDamage(other.gameObject.GetComponent<Bullet>().damage);
         }
     }
 }

@@ -8,21 +8,32 @@ public class PlayerHealth : MonoBehaviour
     private int currentHearts;
     private bool isDead;
 
-    public void initHealth() {
+    private int maxShields;
+    private int currentShields;
+
+    public void initHealth(int shields) {
         currentHearts = numHearts;
+        maxShields = shields;
     }
 
     public float getCurrentHearts() {
         return currentHearts;
     }
-
+    public float getCurrentShield() {
+        return currentShields;
+    }
     public bool getIsDead() {
         return isDead;
     }
 
     public void takeDamage(int damageInHearts) {
-        currentHearts -= damageInHearts;
-        isDead |= currentHearts <= 0;
+        if (currentShields > 0) {
+            currentShields--;
+        }
+        else {
+            currentHearts -= damageInHearts;
+            isDead |= currentHearts <= 0;
+        }
     }
 }
 
