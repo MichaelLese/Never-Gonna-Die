@@ -22,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
             numHearts --;
         }
     }
+    public void IncreaseMaxHeart() {
+        numHearts++;
+    }
 
     public int GetCurrentHearts() {
         return currentHearts;

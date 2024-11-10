@@ -5,9 +5,11 @@ using UnityEngine;
 public class AsteroidsManager : MonoBehaviour {
     [SerializeField] private float arenaRadius = 50f;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private PlayerUI playerUI;
     public GameObject bigAsteroidPrefab;
     public GameObject splitterAsteroidPrefab;
     private GameObject spawnedAsteroid;
+    private float spawnTime;
 
 
     // Start is called before the first frame update
@@ -17,7 +19,15 @@ public class AsteroidsManager : MonoBehaviour {
 
     private void ManageAstroids() {
         CreateAstroid();
-        Invoke("ManageAstroids", levelManager.GetSpawnSpeed(levelManager.GetCurrentLevel()));
+
+        if (levelManager.GetCurrentLevel() <= 5) {
+            Invoke("ManageAstroids", levelManager.GetSpawnSpeed(levelManager.GetCurrentLevel()));
+        }
+        if (levelManager.GetCurrentLevel() > 5) {
+
+            spawnTime = Mathf.Min((float)(5 - ((playerUI.GetCountUpTime() / 60) * 0.5)), 1.5f);
+            Invoke("ManageAstroids", spawnTime);
+        }
     }
 
     private void CreateAstroid() {

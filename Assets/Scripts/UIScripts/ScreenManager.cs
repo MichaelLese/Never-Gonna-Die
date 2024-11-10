@@ -24,6 +24,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Button critButton;
     [SerializeField] private Button agilityButton;
     [SerializeField] private Button shieldButton;
+    [SerializeField] private TextMeshProUGUI waveText;
 
     [SerializeField] private TextMeshProUGUI scrapTotal;
 
@@ -32,6 +33,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Upgrades upgrades;
     [SerializeField] private PlayerHealth health;
     [SerializeField] private PlayerUI playerUI;
+    [SerializeField] private LevelManager levelManager;
 
 
     public void InitScreenManager() {
@@ -99,6 +101,7 @@ public class ScreenManager : MonoBehaviour
     public void TriggerUpgradeScreen() {
         playerUI.UpdateHeartsDisplay(health.GetMaxHearts(), health.GetMaxHearts(), health.GetMaxShield(), health.GetMaxShield());
         upgradeScreenCanvas.SetActive(true);// Show the upgrade screen
+        waveText.text = "START WAVE " + (levelManager.GetCurrentLevel() + 1);
         UpdateUpgradeDisplays();
         UpdateButtons();
         Time.timeScale = 0f;                // Pause the game

@@ -13,10 +13,13 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField] private Transform heartsContainer;
     [SerializeField] private TextMeshProUGUI timerText;
+    private int currentLevel;
+    private float countupTime = 0f;
 
-    public void InitPlayerUI(int maxHearts, int maxShields, float countdownTime) {
+    public void InitPlayerUI(int maxHearts, int maxShields, float countdownTime, int curLevel) {
         UpdateHeartsDisplay(maxHearts, maxHearts, maxShields, maxShields);
         StartCountdown(countdownTime);
+        currentLevel = curLevel;
     }
 
     public void UpdateHeartsDisplay(int currentHearts, int maxHearts, int currentShield, int maxShields) {
@@ -43,6 +46,21 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    public void StartCountup(float maxTime) {
+        StartCoroutine(CountupCoroutine(maxTime));
+    }
+
+    private IEnumerator CountupCoroutine(float maxTime) {
+        countupTime = 0f;
+        while (countupTime < maxTime) {
+            // Update the timer text in MM:SS format
+            timerText.text = $"{Mathf.FloorToInt(countupTime / 60):00}:{Mathf.FloorToInt(countupTime % 60):00}";
+            yield return new WaitForSeconds(1f);
+            countupTime++;
+        }
+        timerText.text = $"{Mathf.FloorToInt(maxTime / 60):00}:{Mathf.FloorToInt(maxTime % 60):00}";
+    }
+
     public void StartCountdown(float countdownTime) {
         StartCoroutine(CountdownCoroutine(countdownTime));
     }
@@ -57,6 +75,15 @@ public class PlayerUI : MonoBehaviour
         timerText.text = "00:00";
 
         ScreenManager sm = GetComponent<ScreenManager>();
-        sm.TriggerUpgradeScreen();
+        if (currentLevel < 5) {
+            sm.TriggerUpgradeScreen();
+        }
+        else {
+            sm.TriggerWinScreen();
+        }
     }
+
+    public float GetCountUpTime() {
+        return countupTime;
     }
+}

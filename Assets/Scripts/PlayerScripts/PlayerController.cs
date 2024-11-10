@@ -52,7 +52,18 @@ public class PlayerController : MonoBehaviour {
         //Initialize weapon damage
         weapon.InitWeapons(upgrades.GetCrit());
         //Initializes the PlayerUI
-        playerUI.InitPlayerUI(health.GetMaxHearts(), health.GetCurrentShield(), levelManager.GetRoundTime());
+        playerUI.InitPlayerUI(health.GetMaxHearts(), health.GetCurrentShield(), levelManager.GetRoundTime(), levelManager.GetCurrentLevel());
+    }
+
+    public void UpdateValuesNotPlayerUI() {
+        //Initialize Upgrades
+        upgrades.InitUpgrades();
+        //Initialize Health
+        health.InitHealth(upgrades.GetShield());
+        //Initialize movement (for agility)
+        movement.InitMovement(upgrades.GetAgility());
+        //Initialize weapon damage
+        weapon.InitWeapons(upgrades.GetCrit());
     }
 
     public void UpdateHearts()
