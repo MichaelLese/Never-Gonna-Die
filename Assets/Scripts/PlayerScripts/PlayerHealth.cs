@@ -17,6 +17,12 @@ public class PlayerHealth : MonoBehaviour
         currentShields = shields;
     }
 
+    public void RemoveMaxHeart() {
+        if (numHearts > 1) {
+            numHearts --;
+        }
+    }
+
     public int GetCurrentHearts() {
         return currentHearts;
     }
@@ -33,6 +39,10 @@ public class PlayerHealth : MonoBehaviour
         return isDead;
     }
 
+    public void SetShields(int shields) {
+        maxShields = shields;
+        currentShields = shields;
+    }
     public void TakeDamage(int damageInHearts) {
         if (currentShields > 0) {
             currentShields -=damageInHearts;

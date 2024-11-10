@@ -26,7 +26,7 @@ public class PlayerUI : MonoBehaviour
         }
 
         // Instantiate new full heart images based on current health
-        for (int i = 0; i < currentHearts; i++) {
+        for (int i = 0; i < Mathf.Min(currentHearts, maxHearts); i++) {
             Instantiate(heartPrefab, heartsContainer);
         }
         // Instantiate new empty heart images based on current health

@@ -13,6 +13,8 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private int maxShield;
     [SerializeField] private int shield;
 
+    [SerializeField] private int scrap = 0;
+
     public void InitUpgrades()
     {
         //agility = 3;
@@ -27,8 +29,9 @@ public class Upgrades : MonoBehaviour
         return maxAgility;
     }
     public void IncreaseAgility() {
-        if (agility < maxAgility) {
+        if (agility < maxAgility && scrap >= 2) {
             agility++;
+            scrap -= 2;
         }
     }
 
@@ -39,8 +42,9 @@ public class Upgrades : MonoBehaviour
         return maxCrit;
     }
     public void IncreaseCrit() {
-        if (crit < maxCrit) {
+        if (crit < maxCrit && scrap >= 1) {
             crit++;
+            scrap --;
         }
     }
 
@@ -53,8 +57,16 @@ public class Upgrades : MonoBehaviour
         return maxShield;
     }
     public void IncreaseShield() {
-        if (shield < maxShield) {
+        if (shield < maxShield && scrap >= 2) {
             shield++;
+            scrap -= 2;
         }
+    }
+
+    public void IncreaseScrap() {
+        scrap += 3;
+    }
+    public int GetScrap() {
+        return scrap;
     }
 }

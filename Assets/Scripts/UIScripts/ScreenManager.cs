@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScreenManager : MonoBehaviour
 {
@@ -15,7 +17,16 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Transform agilityContainer;
     [SerializeField] private Transform shieldContainer;
 
+    [SerializeField] private Button sacrificeButton;
+    [SerializeField] private Button critButton;
+    [SerializeField] private Button agilityButton;
+    [SerializeField] private Button shieldButton;
+
+    [SerializeField] private TextMeshProUGUI scrapTotal;
+
     [SerializeField] private Upgrades upgrades;
+    [SerializeField] private PlayerHealth health;
+    [SerializeField] private PlayerUI playerUI;
 
 
     public void InitScreenManager() {
@@ -35,13 +46,17 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void TriggerUpgradeScreen() {
+        playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
         upgradeScreenCanvas.SetActive(true);// Show the upgrade screen
         UpdateUpgradeDisplays();
+        UpdateButtons();
         Time.timeScale = 0f;                // Pause the game
     }
 
     public void TriggerUpgradeScreenLeave() {
-        upgradeScreenCanvas.SetActive(false);// Hide the upgrade screen
+        startScreenCanvas.SetActive(false);
+        endScreenCanvas.SetActive(false);
+        upgradeScreenCanvas.SetActive(false);
         Time.timeScale = 1f;                 // Resume the game speed
     }
 
@@ -52,6 +67,34 @@ public class ScreenManager : MonoBehaviour
 
     public void QuitGame() {
         Application.Quit();                 // Quit the application
+    }
+
+    public void UpdateScrapTotal() {
+        scrapTotal.text = "" + upgrades.GetScrap() + " Scrap";
+    }
+
+    public void UpdateButtons() {
+        if (upgrades.GetCrit() >= upgrades.GetMaxCrit() || upgrades.GetScrap() < 1) {
+            critButton.enabled = false;
+        }
+        else { critButton.enabled = true; }
+        if (upgrades.GetAgility() >= upgrades.GetMaxAgility() || upgrades.GetScrap() < 2) {
+            agilityButton.enabled = false;
+        }
+        else { agilityButton.enabled = true; }
+        if (upgrades.GetShield() >= upgrades.GetMaxShield() || upgrades.GetScrap() < 2) {
+            shieldButton.enabled = false;
+        }
+        else { shieldButton.enabled = true; }
+
+        if (health.GetMaxHearts() <= 1) {
+            sacrificeButton.enabled = false;
+        }
+        else {
+            sacrificeButton.enabled = true;
+        }
+
+        UpdateScrapTotal();
     }
 
     public void UpdateUpgradeDisplays() {

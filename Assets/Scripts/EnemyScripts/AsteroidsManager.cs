@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidsManager : MonoBehaviour {
     [SerializeField] private float arenaRadius = 50f;
-    [SerializeField] private float waitTime = 5f;
+    [SerializeField] private LevelManager levelManager;
     public GameObject bigAsteroidPrefab;
     public GameObject splitterAsteroidPrefab;
     private GameObject spawnedAsteroid;
@@ -17,7 +17,7 @@ public class AsteroidsManager : MonoBehaviour {
 
     private void ManageAstroids() {
         CreateAstroid();
-        Invoke("ManageAstroids", waitTime);
+        Invoke("ManageAstroids", levelManager.GetSpawnSpeed(levelManager.GetCurrentLevel()));
     }
 
     private void CreateAstroid() {

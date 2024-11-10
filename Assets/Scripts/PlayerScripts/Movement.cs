@@ -7,7 +7,9 @@ public class Movement : MonoBehaviour
     public Dash dash;
 
     [SerializeField] private float moveSpeed = 5f;
+    private float newMoveSpeed;
     [SerializeField] private float smoothTime = 0.1f;
+    private float newSmoothTime;
 
     private Vector2 moveDirection;
     private Vector2 currentVelocity = Vector2.zero;
@@ -22,24 +24,26 @@ public class Movement : MonoBehaviour
 
         switch (agility) {
             case 0:
-                //Do Nothing
+                newMoveSpeed = moveSpeed;
+                newSmoothTime = smoothTime;
                 break;
             case 1:
-                moveSpeed = (float)(1.25) * moveSpeed;
-                smoothTime = (float)(2) * smoothTime;
+                newMoveSpeed = (float)(1.25) * moveSpeed;
+                newSmoothTime = (float)(2) * smoothTime;
                 break;
 
             case 2:
-                moveSpeed = (float)(1.60) * moveSpeed;
-                smoothTime = (float)(5) * smoothTime;
+                newMoveSpeed = (float)(1.60) * moveSpeed;
+                newSmoothTime = (float)(5) * smoothTime;
                 break;
 
             case 3:
-                moveSpeed = (float)(2) * moveSpeed;
-                smoothTime = (float)(9) * smoothTime;
+                newMoveSpeed = (float)(2) * moveSpeed;
+                newSmoothTime = (float)(9) * smoothTime;
                 break;
             default:
-                //Do nothing
+                newMoveSpeed = moveSpeed;
+                newSmoothTime = smoothTime;
                 break;
         }
     }
@@ -52,7 +56,7 @@ public class Movement : MonoBehaviour
             moveDirection = new Vector2(moveX, moveY).normalized;
             moveAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
             // Lerp current velocity towards the target direction
-            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * moveSpeed, smoothTime * Time.deltaTime);
+            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * newMoveSpeed, newSmoothTime * Time.deltaTime);
             // Apply the lerped velocity to the Rigidbody
             rb.velocity = currentVelocity;
 
@@ -61,7 +65,7 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         else {
-            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * dash.GetDashSpeed(), smoothTime * Time.deltaTime);
+            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * dash.GetDashSpeed(), newSmoothTime * Time.deltaTime);
             rb.velocity = currentVelocity;
         }
     }
