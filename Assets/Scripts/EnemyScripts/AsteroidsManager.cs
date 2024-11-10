@@ -5,7 +5,9 @@ using UnityEngine;
 public class AsteroidsManager : MonoBehaviour {
     [SerializeField] private float arenaRadius = 50f;
     [SerializeField] private float waitTime = 5f;
-    public GameObject astroidPrefab;
+    public GameObject bigAsteroidPrefab;
+    public GameObject splitterAsteroidPrefab;
+    private GameObject spawnedAsteroid;
 
 
     // Start is called before the first frame update
@@ -19,6 +21,13 @@ public class AsteroidsManager : MonoBehaviour {
     }
 
     private void createAstroid() {
+        if (Random.Range(0, 2) == 0) {
+            spawnedAsteroid = bigAsteroidPrefab;
+        }
+        else {
+            spawnedAsteroid = splitterAsteroidPrefab;
+        }
+
         // Generate a random angle in radians
         float angle = Random.Range(0f, Mathf.PI * 2);
         // Calculate the position on the perimeter of the arena
@@ -27,9 +36,9 @@ public class AsteroidsManager : MonoBehaviour {
         // Calculate rotation to look toward the center (0,0)
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, -spawnPos);
         // Instantiate the asteroid at the perimeter, facing the center
-        GameObject asteroid = Instantiate(astroidPrefab, spawnPosition, rotation);
+        GameObject asteroid = Instantiate(spawnedAsteroid, spawnPosition, rotation);
 
-        AsteroidController astroidScript = asteroid.GetComponent<AsteroidController>();
+        AsteroidController astroidScript = spawnedAsteroid.GetComponent<AsteroidController>();
         if (astroidScript != null) {
             astroidScript.setArenaRadius(arenaRadius);
         }

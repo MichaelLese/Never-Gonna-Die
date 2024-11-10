@@ -9,10 +9,13 @@ public class AsteroidController : MonoBehaviour
     public AsteroidMovement movement;
     public AsteroidHealth health;
 
+
     // Gets this from the astroidsManager script
     [SerializeField] private float arenaRadius;
 
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private bool isSplitter = false;
+    [SerializeField] private GameObject splitAsteroidPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,10 @@ public class AsteroidController : MonoBehaviour
         if (health.getIsDead()) {
             //Destroy asteroid and play an effect (Explosion)
             Explode();
+            if (isSplitter) {
+                Instantiate(splitAsteroidPrefab, transform.position, transform.rotation);
+                Instantiate(splitAsteroidPrefab, transform.position, transform.rotation);
+            }
             Destroy(gameObject);
         }
     }
@@ -46,6 +53,7 @@ public class AsteroidController : MonoBehaviour
         if (other.gameObject.CompareTag("PlayerBullet")) {
             Debug.Log("Asteroid Hit! It took damage: " + health.getCurrentHearts() + " From a bullet that did: " + other.gameObject.GetComponent<Bullet>().damage);
             health.takeDamage(other.gameObject.GetComponent<Bullet>().damage);
+            health.flashRed();
         }
     }
 }
