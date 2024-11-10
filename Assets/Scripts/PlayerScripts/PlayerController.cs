@@ -28,7 +28,13 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             movement.StartDash();
         }
-        movement.UpdateMovement(rb);
+        if (Input.GetKeyDown(KeyCode.Escape) && !screenManager.GetIsPaused()) {
+            screenManager.TriggerPauseScreen();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && screenManager.GetIsPaused()) {
+            screenManager.TriggerLeavePauseScreen();
+        }
+            movement.UpdateMovement(rb);
 
         if (health.GetIsDead()) {
             screenManager.TriggerGameOver();    // Go to the game over screen!

@@ -11,6 +11,8 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject endScreenCanvas;
     [SerializeField] private GameObject upgradeScreenCanvas;
     [SerializeField] private GameObject instructionScreenCanvas;
+    [SerializeField] private GameObject winScreenCanvas;
+    [SerializeField] private GameObject pauseScreenCanvas;
 
     [SerializeField] private GameObject lockedBar;
     [SerializeField] private GameObject unlockedBar;
@@ -25,6 +27,8 @@ public class ScreenManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scrapTotal;
 
+    private bool isPaused = false;
+
     [SerializeField] private Upgrades upgrades;
     [SerializeField] private PlayerHealth health;
     [SerializeField] private PlayerUI playerUI;
@@ -35,6 +39,8 @@ public class ScreenManager : MonoBehaviour
         endScreenCanvas.SetActive(false);
         upgradeScreenCanvas.SetActive(false);
         instructionScreenCanvas.SetActive(false);
+        winScreenCanvas.SetActive(false);
+        pauseScreenCanvas.SetActive(false);
         Time.timeScale = 0.0f;
     }
     public void StartGame() {
@@ -42,21 +48,51 @@ public class ScreenManager : MonoBehaviour
         Time.timeScale = 1f;                // Resume game speed
     }
 
+    public void TriggerPauseScreen() {
+        pauseScreenCanvas.SetActive(true);
+        Time.timeScale = 0.0f;
+        isPaused = true;
+    }
+
+    public void TriggerLeavePauseScreen() {
+        pauseScreenCanvas.SetActive(false);
+        
+        if (AreAllScreensInactive()) {
+            Time.timeScale = 1.0f;
+        }
+        isPaused = false;
+    }
+    public bool GetIsPaused() {
+        return isPaused;
+    }
+    private bool AreAllScreensInactive() {
+        return !startScreenCanvas.activeSelf && !endScreenCanvas.activeSelf && !upgradeScreenCanvas.activeSelf && !instructionScreenCanvas.activeSelf && !winScreenCanvas.activeSelf;
+    }
+
+    public void TriggerWinScreen() {
+        startScreenCanvas.SetActive(false);
+        endScreenCanvas.SetActive(false);
+        upgradeScreenCanvas.SetActive(false);
+        instructionScreenCanvas.SetActive(false);
+        winScreenCanvas.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void TriggerLeaveWinScreen() {
+        winScreenCanvas.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
+
     public void TriggerGameOver() {
         endScreenCanvas.SetActive(true);    // Show the end screen
         Time.timeScale = 0f;                // Pause the game
     }
 
     public void TriggerInstructions() {
-        startScreenCanvas.SetActive(false);
-        endScreenCanvas.SetActive(false);
-        upgradeScreenCanvas.SetActive(false);
         instructionScreenCanvas.SetActive(true);
     }
     public void TriggerLeaveInstructions() {
-        startScreenCanvas.SetActive(true);
-        endScreenCanvas.SetActive(false);
-        upgradeScreenCanvas.SetActive(false);
         instructionScreenCanvas.SetActive(false);
     }
 
