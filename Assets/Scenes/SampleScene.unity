@@ -4062,10 +4062,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Controls: \n\tMove: WASD\n\tAim: Mouse\n\tPrimary Shoot: L-Mouse\n\nGoals:\n\tSurvive
-    5 waves gaining HP at the end of each wave\n\tUpgrade your ship's Damage, Agility,
-    and Shields using \"Scrap\"\n\tObtain \"Scrap\" by sacrificing permanant HP (One
-    Heart = 3 Scrap)"
+  m_text: "Controls: \n\tMove: WASD\n\tAim: Mouse\n\tShoot: L-Mouse\n\nGoals:\n\t-Survive
+    5 waves gaining HP at the end of each wave\n\t-Upgrade your ship's Damage, Agility,
+    and Shields using \"Scrap\"\n\t-Purchase and upgrade different weapons using
+    \"Scrap\"\n\t-Obtain \"Scrap\" by sacrificing permanant HP (One Heart = 3 Scrap)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6168,7 +6168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &962509819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8448,7 +8448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1596400228
 MonoBehaviour:
   m_ObjectHideFlags: 0
