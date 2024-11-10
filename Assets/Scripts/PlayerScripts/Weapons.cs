@@ -15,7 +15,7 @@ public class Weapons : MonoBehaviour {
         lastShot = Time.time - shotCooldown;
     }
 
-    public void initWeapons(int crit) {
+    public void InitWeapons(int crit) {
         critLevel = crit;
     }
 
@@ -24,7 +24,7 @@ public class Weapons : MonoBehaviour {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null) {
-                bulletScript.damage = calculateDamage(critLevel);
+                bulletScript.damage = CalculateDamage(critLevel);
                 // TODO: maybe change so it also changes color when it is a crit
             }
             Vector2 direction = (mousePosition).normalized;
@@ -34,7 +34,7 @@ public class Weapons : MonoBehaviour {
         }
     }
 
-    private int calculateDamage(int crit) {
+    private int CalculateDamage(int crit) {
         // Random number will check if its a crit or not
         // 5 levels of crit
         int randomNumber = Random.Range(0, 11); // 0 to 10 inclusive

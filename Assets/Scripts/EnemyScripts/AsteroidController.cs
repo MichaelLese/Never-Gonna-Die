@@ -20,16 +20,16 @@ public class AsteroidController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health.initHealth();
-        movement.startAsteroid(arenaRadius);
+        health.InitHealth();
+        movement.StartAsteroid(arenaRadius);
     }
 
     // Update is called once per frame
     void Update()
     {
-        movement.updateMovement(rb);
+        movement.UpdateMovement(rb);
 
-        if (health.getIsDead()) {
+        if (health.GetIsDead()) {
             //Destroy asteroid and play an effect (Explosion)
             Explode();
             if (isSplitter) {
@@ -45,15 +45,15 @@ public class AsteroidController : MonoBehaviour
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
     }
 
-    public void setArenaRadius(float radius) {
+    public void SetArenaRadius(float radius) {
         arenaRadius = radius;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("PlayerBullet")) {
-            Debug.Log("Asteroid Hit! It took damage: " + health.getCurrentHearts() + " From a bullet that did: " + other.gameObject.GetComponent<Bullet>().damage);
-            health.takeDamage(other.gameObject.GetComponent<Bullet>().damage);
-            health.flashRed();
+            Debug.Log("Asteroid Hit! It took damage: " + health.GetCurrentHearts() + " From a bullet that did: " + other.gameObject.GetComponent<Bullet>().damage);
+            health.TakeDamage(other.gameObject.GetComponent<Bullet>().damage);
+            health.FlashRed();
         }
     }
 }

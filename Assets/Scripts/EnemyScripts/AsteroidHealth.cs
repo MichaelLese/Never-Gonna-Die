@@ -9,28 +9,28 @@ public class AsteroidHealth : MonoBehaviour {
 
     private SpriteRenderer sr;
 
-    public void initHealth() {
+    public void InitHealth() {
         currentHearts = numHearts;
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public float getCurrentHearts() {
+    public float GetCurrentHearts() {
         return currentHearts;
     }
 
-    public bool getIsDead() {
+    public bool GetIsDead() {
         return isDead;
     }
 
-    public void flashRed() {
+    public void FlashRed() {
         sr.color = new Color(1f, 0.81f, 0.81f, 1f);
-        Invoke("returnColor", 0.1f);
+        Invoke("ReturnColor", 0.1f);
     }
-    public void returnColor() {
+    public void ReturnColor() {
         sr.color = Color.white;
     }
 
-    public void takeDamage(int damageInHearts) {
+    public void TakeDamage(int damageInHearts) {
         currentHearts -= damageInHearts;
         isDead |= currentHearts <= 0;
     }

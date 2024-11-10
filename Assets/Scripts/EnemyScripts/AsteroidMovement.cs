@@ -14,14 +14,14 @@ public class AsteroidMovement : MonoBehaviour {
     private bool isInZone = false;
     private float arenaRadius;
 
-    public void updateMovement(Rigidbody2D rb) {
+    public void UpdateMovement(Rigidbody2D rb) {
         // Lerp current velocity towards the target direction
         currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * moveSpeed, smoothTime * Time.deltaTime);
         // Apply the lerped velocity to the Rigidbody
         rb.velocity = currentVelocity;
     }
 
-    public void findFirstTarget() {
+    public void FindFirstTarget() {
         //TODO: Make it so it doesn't always go straight to the middle (slightly to the side randomly)
         if (Vector2.Distance(transform.position, Vector2.zero) > arenaRadius) {
             isInZone = false;
@@ -31,10 +31,10 @@ public class AsteroidMovement : MonoBehaviour {
         }
 
         moveDirection = (-transform.position).normalized;
-        Invoke("findNewTarget", retargetTimer);
+        Invoke("FindNewTarget", retargetTimer);
     }
 
-    public void findNewTarget() {
+    public void FindNewTarget() {
         if (Vector2.Distance(transform.position, Vector2.zero) > arenaRadius) {
             isInZone = false;
         }
@@ -44,17 +44,17 @@ public class AsteroidMovement : MonoBehaviour {
 
         if (isInZone) {
             moveDirection = Random.insideUnitCircle.normalized;
-            Invoke("findNewTarget", retargetTimer);
+            Invoke("FindNewTarget", retargetTimer);
         }
         else {
             moveDirection = (-transform.position).normalized;
-            Invoke("findNewTarget", retargetTimer);
+            Invoke("FindNewTarget", retargetTimer);
             Debug.Log("Asteroid is OUT");
         }
     }
 
-    public void startAsteroid(float radius) {
+    public void StartAsteroid(float radius) {
         arenaRadius = radius;
-        findFirstTarget();
+        FindFirstTarget();
     }
 }

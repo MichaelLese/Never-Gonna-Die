@@ -11,33 +11,37 @@ public class PlayerController : MonoBehaviour
     public Weapons weapon;
     public PlayerHealth health;
     public Upgrades upgrades;
+    public ScreenManager screenManager;
 
     // Start is called before the first frame update
     void Start()
     {
         //Initialize Health
-        health.initHealth(upgrades.getShield());
+        health.InitHealth(upgrades.GetShield());
         //Initialize Upgrades
-        upgrades.initUpgrades();
+        upgrades.InitUpgrades();
         //Initialize movement (for agility)
-        movement.initMovement(upgrades.getAgility());
+        movement.InitMovement(upgrades.GetAgility());
         //Initialize weapon damage
-        weapon.initWeapons(upgrades.getCrit());
+        weapon.InitWeapons(upgrades.GetCrit());
+        //Initialize the screen manager
+        screenManager.InitScreenManager();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
-            weapon.Fire(movement.getMousePosition());
+            weapon.Fire(movement.GetMousePosition());
         } 
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
-            movement.startDash();
+            movement.StartDash();
         }
-        movement.updateMovement(rb);
+        movement.UpdateMovement(rb);
 
-        if (health.getIsDead()) {
+        if (health.GetIsDead()) {
             //End the game
+            screenManager.TriggerGameOver();
             Debug.Log("End Game");
         }
     }
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Asteroid")) {
             Debug.Log("Player Hit!");
-            health.takeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
+            health.TakeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
         }
     }
 }

@@ -13,36 +13,35 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private int maxShield;
     [SerializeField] private int shield;
 
-    // Start is called before the first frame update
-    public void initUpgrades()
+    public void InitUpgrades()
     {
         agility = 0;
         crit = 0;
         shield = 0;
     }
 
-    public int getAgility() {
+    public int GetAgility() {
         return agility; 
     }    
-    public void increaseAgility() {
+    public void IncreaseAgility() {
         if (agility < maxAgility) {
             agility++;
         }
     }
 
-    public int getCrit() {
+    public int GetCrit() {
         return crit;
     }
-    public void increaseCrit() {
+    public void IncreaseCrit() {
         if (crit < maxCrit) {
             crit++;
         }
     }
 
-    public int getShield() {
+    public int GetShield() {
         return shield;
     }
-    public void increaseShield() {
+    public void IncreaseShield() {
         if (shield < maxShield) {
             shield++;
         }

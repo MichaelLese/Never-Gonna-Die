@@ -12,15 +12,15 @@ public class AsteroidsManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        manageAstroids();
+        ManageAstroids();
     }
 
-    private void manageAstroids() {
-        createAstroid();
+    private void ManageAstroids() {
+        CreateAstroid();
         Invoke("manageAstroids", waitTime);
     }
 
-    private void createAstroid() {
+    private void CreateAstroid() {
         if (Random.Range(0, 2) == 0) {
             spawnedAsteroid = bigAsteroidPrefab;
         }
@@ -40,7 +40,7 @@ public class AsteroidsManager : MonoBehaviour {
 
         AsteroidController astroidScript = spawnedAsteroid.GetComponent<AsteroidController>();
         if (astroidScript != null) {
-            astroidScript.setArenaRadius(arenaRadius);
+            astroidScript.SetArenaRadius(arenaRadius);
         }
     }
 }

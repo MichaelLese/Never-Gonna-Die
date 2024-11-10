@@ -15,40 +15,40 @@ public class Dash : MonoBehaviour {
 
     //public float getDashSpeed() { return currentDashSpeed; }
 
-    public void dash(float moveAngle) {
+    public void DoDash(float moveAngle) {
         if ((Time.time - lastDash) >= dashCooldown) {
             currentDashSpeed = dashSpeed;
             lastDash = Time.time;
             isDashing = true;
             isRecovering = true;
 
-            Invoke("endDash", dashActive);
-            Invoke("setRecoveringFalse", dashRecovery);
+            Invoke("EndDash", dashActive);
+            Invoke("SetRecoveringFalse", dashRecovery);
         }
     }
 
-    public float getDashSpeed() {
+    public float GetDashSpeed() {
         return dashSpeed;
     }
 
-    public void endDash() {
+    public void EndDash() {
         currentDashSpeed = 0;
         isDashing = false;
     }
 
-    public bool getIsDashing() {
+    public bool GetIsDashing() {
         return isDashing;
     }
 
-    public float getDashRecovery() {
+    public float GetDashRecovery() {
         return dashRecovery;
     }
 
-    public bool getRecovering() {
+    public bool GetRecovering() {
         return isRecovering;
     }
 
-    public void setRecoveringFalse() {
+    public void SetRecoveringFalse() {
         isRecovering = false;
     }
 }

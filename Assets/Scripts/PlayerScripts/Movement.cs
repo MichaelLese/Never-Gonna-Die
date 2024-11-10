@@ -17,7 +17,7 @@ public class Movement : MonoBehaviour
     // TODO: Make agility actually do something
     private int agilityLevel;
 
-    public void initMovement(int agility) {
+    public void InitMovement(int agility) {
         agilityLevel = agility;
 
         switch (agility) {
@@ -44,8 +44,8 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void updateMovement(Rigidbody2D rb) {
-        if (dash.getIsDashing() == false) {
+    public void UpdateMovement(Rigidbody2D rb) {
+        if (dash.GetIsDashing() == false) {
             float moveX = Input.GetAxisRaw("Horizontal");
             float moveY = Input.GetAxisRaw("Vertical");
 
@@ -61,16 +61,16 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
         else {
-            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * dash.getDashSpeed(), smoothTime * Time.deltaTime);
+            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * dash.GetDashSpeed(), smoothTime * Time.deltaTime);
             rb.velocity = currentVelocity;
         }
     }
 
-    public void startDash() {
-        dash.dash(moveAngle);
+    public void StartDash() {
+        dash.DoDash(moveAngle);
     }
 
-    public Vector3 getMousePosition() {
+    public Vector3 GetMousePosition() {
         return dir;
     }
 }
