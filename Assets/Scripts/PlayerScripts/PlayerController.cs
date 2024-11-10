@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         //Initialize the screen manager
         screenManager.InitScreenManager();
         //Initializes the PlayerUI
-        playerUI.InitPlayerUI(health.GetMaxHearts(), health.GetCurrentShield(), 100f);
+        playerUI.InitPlayerUI(health.GetMaxHearts(), health.GetCurrentShield(), 20f);
     }
 
     // Update is called once per frame
