@@ -11,7 +11,7 @@ public class AsteroidMovement : MonoBehaviour {
 
     private Vector2 moveDirection;
     private Vector2 currentVelocity = Vector2.zero;
-    private bool isInZone = true;
+    private bool isInZone = false;
     private float arenaRadius;
 
     public void updateMovement(Rigidbody2D rb) {
@@ -19,6 +19,19 @@ public class AsteroidMovement : MonoBehaviour {
         currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * moveSpeed, smoothTime * Time.deltaTime);
         // Apply the lerped velocity to the Rigidbody
         rb.velocity = currentVelocity;
+    }
+
+    public void findFirstTarget() {
+        //TODO: Make it so it doesn't always go straight to the middle (slightly to the side randomly)
+        if (Vector2.Distance(transform.position, Vector2.zero) > arenaRadius) {
+            isInZone = false;
+        }
+        else {
+            isInZone = true;
+        }
+
+        moveDirection = (-transform.position).normalized;
+        Invoke("findNewTarget", retargetTimer);
     }
 
     public void findNewTarget() {
@@ -42,6 +55,6 @@ public class AsteroidMovement : MonoBehaviour {
 
     public void startAsteroid(float radius) {
         arenaRadius = radius;
-        findNewTarget();
+        findFirstTarget();
     }
 }
