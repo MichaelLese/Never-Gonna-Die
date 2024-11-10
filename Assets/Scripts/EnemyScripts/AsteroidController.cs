@@ -9,8 +9,8 @@ public class AsteroidController : MonoBehaviour
     public AsteroidMovement movement;
     public AsteroidHealth health;
 
-    // TODO: Put this in the even larger enemies controller script eventually
-    [SerializeField] private float arenaRadius = 10f;
+    // Gets this from the astroidsManager script
+    [SerializeField] private float arenaRadius;
 
     [SerializeField] private GameObject explosionPrefab;
 
@@ -36,6 +36,10 @@ public class AsteroidController : MonoBehaviour
     private void Explode() {
         // Instantiate explosion at asteroid's position and rotation
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+    }
+
+    public void setArenaRadius(float radius) {
+        arenaRadius = radius;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
