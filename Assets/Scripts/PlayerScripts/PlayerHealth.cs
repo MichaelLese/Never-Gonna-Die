@@ -16,11 +16,17 @@ public class PlayerHealth : MonoBehaviour
         maxShields = shields;
     }
 
-    public float GetCurrentHearts() {
+    public int GetCurrentHearts() {
         return currentHearts;
     }
-    public float GetCurrentShield() {
+    public int GetMaxHearts() {
+        return numHearts;
+    }
+    public int GetCurrentShield() {
         return currentShields;
+    }
+    public int GetMaxShield() {
+        return maxShields;
     }
     public bool GetIsDead() {
         return isDead;

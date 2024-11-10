@@ -12,20 +12,23 @@ public class PlayerController : MonoBehaviour
     public PlayerHealth health;
     public Upgrades upgrades;
     public ScreenManager screenManager;
+    public PlayerUI playerUI;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Initialize Health
-        health.InitHealth(upgrades.GetShield());
         //Initialize Upgrades
         upgrades.InitUpgrades();
+        //Initialize Health
+        health.InitHealth(upgrades.GetShield());
         //Initialize movement (for agility)
         movement.InitMovement(upgrades.GetAgility());
         //Initialize weapon damage
         weapon.InitWeapons(upgrades.GetCrit());
         //Initialize the screen manager
         screenManager.InitScreenManager();
+        //Initializes the healthbar
+        playerUI.InitHearts(health.GetMaxHearts(), health.GetCurrentShield());
     }
 
     // Update is called once per frame
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.CompareTag("Asteroid")) {
             Debug.Log("Player Hit!");
+            playerUI.UpdateHeartsDisplay(health.GetCurrentHearts(), health.GetMaxHearts(), health.GetCurrentShield(), health.GetMaxShield());
             health.TakeDamage(1); // Change to this: other.gameObject.GetComponent<AsteroidController>().damage
         }
     }
