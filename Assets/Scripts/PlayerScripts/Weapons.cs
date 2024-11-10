@@ -165,35 +165,35 @@ public class Weapons : MonoBehaviour {
         }
     }
 
-    public bool getNormalIsUpgraded() {
+    public bool GetNormalIsUpgraded() {
         return normalIsUpgraded;
     }
-    public void setNormalIsUpgraded() {
+    public void SetNormalIsUpgraded() {
         normalIsUpgraded = true;
     }
-    public bool getBurstIsUpgraded() {
+    public bool GetBurstIsUpgraded() {
         return burstIsUpgraded;
     }
-    public void setBurstIsUpgraded() {
+    public void SetBurstIsUpgraded() {
         burstIsUpgraded = true;
     }
-    public bool getShotgunIsUpgraded() {
+    public bool GetShotgunIsUpgraded() {
         return shotgunIsUpgraded;
     }
-    public void setShotgunIsUpgraded() {
+    public void SetShotgunIsUpgraded() {
         shotgunIsUpgraded = true;
     }
 
-    public bool getOwnsBurst() {
+    public bool GetOwnsBurst() {
         return ownsBurst;
     }
-    public void setOwnsBurst() {
+    public void SetOwnsBurst() {
         ownsBurst = true;
     }
-    public bool getOwnsShotgun() {
+    public bool GetOwnsShotgun() {
         return ownsShotgun;
     }
-    public void setOwnsShotgun() {
+    public void SetOwnsShotgun() {
         ownsShotgun = true;
     }
 }

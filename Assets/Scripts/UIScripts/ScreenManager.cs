@@ -21,12 +21,15 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private Transform shieldContainer;
     [SerializeField] private Transform normalWeaponContainer;
     [SerializeField] private Transform burstWeaponContainer;
-    [SerializeField] private Transform shotgunContainer;
+    [SerializeField] private Transform shotgunWeaponContainer;
 
     [SerializeField] private Button sacrificeButton;
     [SerializeField] private Button critButton;
     [SerializeField] private Button agilityButton;
     [SerializeField] private Button shieldButton;
+    [SerializeField] private Button normalWeaponButton;
+    [SerializeField] private Button burstWeaponButton;
+    [SerializeField] private Button shotgunWeaponButton;
     [SerializeField] private TextMeshProUGUI waveText;
 
     [SerializeField] private TextMeshProUGUI scrapTotal;
@@ -145,6 +148,16 @@ public class ScreenManager : MonoBehaviour
         }
         else { shieldButton.enabled = true; }
 
+        if (upgrades.GetScrap() < 5 || weapons.GetNormalIsUpgraded()) {
+            normalWeaponButton.enabled = false;
+        } else { normalWeaponButton.enabled = true; }
+        if (upgrades.GetScrap() < 5 || weapons.GetBurstIsUpgraded()) {
+            burstWeaponButton.enabled = false;
+        } else { burstWeaponButton.enabled = true; }
+        if (upgrades.GetScrap() < 5 || weapons.GetShotgunIsUpgraded()) {
+            shotgunWeaponButton.enabled = false;
+        } else { shotgunWeaponButton.enabled = true; }
+
         if (health.GetMaxHearts() <= 1) {
             sacrificeButton.enabled = false;
         }
@@ -156,6 +169,7 @@ public class ScreenManager : MonoBehaviour
     }
 
     public void UpdateUpgradeDisplays() {
+        //For the ship upgrades
         foreach (Transform child in critContainer) {
             Destroy(child.gameObject);
         }
@@ -163,6 +177,17 @@ public class ScreenManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         foreach (Transform child in shieldContainer) {
+            Destroy(child.gameObject);
+        }
+
+        //For the weapon upgrades
+        foreach (Transform child in normalWeaponContainer) {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in burstWeaponContainer) {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in shotgunWeaponContainer) {
             Destroy(child.gameObject);
         }
 
