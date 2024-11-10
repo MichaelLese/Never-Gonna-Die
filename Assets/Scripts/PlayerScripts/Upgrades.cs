@@ -22,7 +22,10 @@ public class Upgrades : MonoBehaviour
 
     public int GetAgility() {
         return agility; 
-    }    
+    }
+    public int GetMaxAgility() {
+        return maxAgility;
+    }
     public void IncreaseAgility() {
         if (agility < maxAgility) {
             agility++;
@@ -31,6 +34,9 @@ public class Upgrades : MonoBehaviour
 
     public int GetCrit() {
         return crit;
+    }
+    public int GetMaxCrit() {
+        return maxCrit;
     }
     public void IncreaseCrit() {
         if (crit < maxCrit) {
@@ -41,6 +47,10 @@ public class Upgrades : MonoBehaviour
     public int GetShield() {
         Debug.Log("shield: " + shield);
         return shield;
+    }
+    public int GetMaxShield() {
+        Debug.Log("shield: " + shield);
+        return maxShield;
     }
     public void IncreaseShield() {
         if (shield < maxShield) {
